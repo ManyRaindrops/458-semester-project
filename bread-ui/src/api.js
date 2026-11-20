@@ -1,4 +1,4 @@
-const BACKEND_MODE = "mock" // change to fastapi for real backend
+const BACKEND_MODE = "fastapi" // change to fastapi for real backend
 
 const MOCK_RANK_RESPONSE = {
   matched_pantry: [

@@ -1,0 +1,11 @@
+# Python virtual environment & caches
+.venv/
+__pycache__/
+*.py[cod]
+
+# Secrets & environment variables
+.env
+
+# Node / React (in case root gitignore doesn't cover subfolders)
+node_modules/
+dist/
