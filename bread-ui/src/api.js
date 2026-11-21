@@ -1,4 +1,6 @@
-const BACKEND_MODE = "fastapi" // change to fastapi for real backend
+// "fastapi" calls the real backend on :8000; "mock" uses the canned responses below.
+// Override without editing code: `npm run dev:mock` (sets VITE_BACKEND_MODE=mock).
+const BACKEND_MODE = import.meta.env.VITE_BACKEND_MODE || "fastapi";
 
 const MOCK_RANK_RESPONSE = {
   matched_pantry: [
