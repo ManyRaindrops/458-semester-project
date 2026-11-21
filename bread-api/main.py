@@ -1,3 +1,9 @@
+"""FastAPI entry point and HTTP endpoints for the Bread prototype.
+
+Run from this directory with ``uvicorn main:app --reload``. The route
+responses currently contain prototype data; see the API README for details.
+"""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -12,24 +18,31 @@ app.add_middleware(
 )
 
 class TimeWindow(BaseModel):
+    """A user's available time interval, using 24-hour ``HH:MM`` strings."""
+
     id: int
     day: str
     start: str
     end: str
 
 class RankRequest(BaseModel):
+    """Inputs accepted by ``POST /api/rank``."""
+
     pantry_text: str
     exclusions: list[str]
     equipment: list[str]
     free_windows: list[TimeWindow]
 
 class ScheduleRequest(BaseModel):
+    """Inputs accepted by ``POST /api/schedule``."""
+
     recipe_id: str
     servings: int
     free_windows: list[TimeWindow]
 
 @app.post("/api/rank")
 def rank_recipes(req: RankRequest):
+    """Return pantry matches and recipe suggestions (currently hard-coded)."""
     # Replace with embedding matcher + linear ranker
     return {
         "matched_pantry": [
@@ -56,6 +69,7 @@ from scheduler import create_schedule
 
 @app.post("/api/schedule")
 def generate_schedule(req: ScheduleRequest):
+    """Build a schedule for a temporary recipe and the submitted windows."""
     # Temporary mock recipe lookup until ranker.py/recipes.py is built
     recipe = {
         "id": req.recipe_id,
